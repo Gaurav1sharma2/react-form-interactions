@@ -20,7 +20,7 @@ describe('LoginPage - Jest Unit Tests', () => {
   test('TEST 1: renders login form with email and password fields', () => {
     render(<LoginPage onLogin={mockOnLogin} />);
     
-    expect(screen.getByText('Login')).toBeInTheDocument();
+    expect(screen.getByRole('heading', { name: /Login/ })).toBeInTheDocument();
     expect(screen.getByLabelText(/Email/)).toBeInTheDocument();
     expect(screen.getByLabelText(/Password/)).toBeInTheDocument();
   });

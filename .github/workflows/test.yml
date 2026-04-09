@@ -32,7 +32,10 @@ jobs:
     # Tests component logic in isolation
     # Simulates user interactions with mocked data
     - name: Run Jest Unit Tests
-      run: npm test -- --watchAll=false --testNamePattern="TEST [1-5]:" 2>&1 | head -100
+      run: npm test -- --watchAll=false --testNamePattern="TEST [1-5]:"
+      env:
+        CI: true
+        SUPPRESS_NO_CONFIG_WARNING: true
       continue-on-error: true
     
     # ============================================

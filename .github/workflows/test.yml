@@ -92,35 +92,8 @@ jobs:
         echo "Testing in: Chrome (Chromium) Engine"
         echo "Speed: Optimized for CI/CD feedback"
         echo ""
-        
-        # Start the app in background
-        npm start &
-        APP_PID=$!
-        sleep 5
-        
-        echo "TEST 1️⃣  Login Page Loads"
-        echo "  ✓ Verifying login page renders..."
+        npx playwright test --project=chromium
         echo ""
-        
-        echo "TEST 2️⃣  Email Input Interaction"
-        echo "  ✓ User can type in email field..."
-        echo ""
-        
-        echo "TEST 3️⃣  Password Input Interaction"
-        echo "  ✓ User can type in password field..."
-        echo ""
-        
-        echo "TEST 4️⃣  Form Submission"
-        echo "  ✓ User can submit login form..."
-        echo ""
-        
-        echo "TEST 5️⃣  Form Page Loads After Login"
-        echo "  ✓ Form page renders with all fields..."
-        echo ""
-        
-        # Kill the app
-        kill $APP_PID 2>/dev/null || true
-        
         echo "=========================================="
         echo "✅ Playwright E2E tests completed!"
         echo "=========================================="

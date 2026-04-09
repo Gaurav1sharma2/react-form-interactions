@@ -52,8 +52,26 @@
 }
 
 .form-group input:focus {
-  outline: none;
+  outline: 3px solid #667eea;
+  outline-offset: 2px;
   border-color: #667eea;
+}
+
+.form-group input[aria-invalid="true"] {
+  border-color: #dc3545;
+  background-color: #fff5f5;
+}
+
+.form-group input[aria-invalid="true"]:focus {
+  outline-color: #dc3545;
+}
+
+.error-message {
+  display: block;
+  color: #dc3545;
+  font-size: 12px;
+  margin-top: 6px;
+  font-weight: 500;
 }
 
 .login-btn {
@@ -61,16 +79,26 @@
   padding: 12px;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
-  border: none;
+  border: 2px solid transparent;
   border-radius: 6px;
   font-size: 16px;
   font-weight: 600;
   cursor: pointer;
-  transition: transform 0.2s;
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .login-btn:hover {
   transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.login-btn:focus {
+  outline: 3px solid #667eea;
+  outline-offset: 2px;
+}
+
+.login-btn:active {
+  transform: translateY(0);
 }
 
 .dummy-credentials {

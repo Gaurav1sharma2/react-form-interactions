@@ -116,10 +116,9 @@ test.describe('Complete E2E Tests - Login & Form', () => {
     // Submit form
     await page.locator('button:has-text("Submit")').click();
     
-    // Verify answers display
-    await expect(page.locator(`text=${mockBlank1}`)).toBeVisible();
-    await expect(page.locator(`text=${mockBlank2}`)).toBeVisible();
-    await expect(page.locator(`text=${mockBlank3}`)).toBeVisible();
-    await expect(page.locator(`text=${mockDropdown}`)).toBeVisible();
+    // Verify answers display with specific selectors
+    await expect(page.locator('.answers-display')).toContainText(mockBlank1);
+    await expect(page.locator('.answers-display')).toContainText(mockBlank3);
+    await expect(page.locator('.answers-display')).toContainText(mockDropdown);
   });
 });

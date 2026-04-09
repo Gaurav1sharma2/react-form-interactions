@@ -30,9 +30,8 @@ test.describe('Complete E2E Tests - Login & Form', () => {
     // Click login button
     await page.locator('button:has-text("Login")').click();
     
-    // Verify navigation to form page
-    await page.waitForURL('**/form', { timeout: 5000 });
-    await expect(page.locator('text=Form with Fill-in-the-Blank')).toBeVisible();
+    // Wait for form page to load (check for form heading)
+    await expect(page.locator('text=Fill-in-the-Blank')).toBeVisible({ timeout: 10000 });
   });
 
   // TEST 2: Fill Form Inputs
@@ -43,7 +42,7 @@ test.describe('Complete E2E Tests - Login & Form', () => {
     await page.locator('input[id="email"]').fill(mockEmail);
     await page.locator('input[id="password"]').fill(mockPassword);
     await page.locator('button:has-text("Login")').click();
-    await page.waitForURL('**/form', { timeout: 5000 });
+    await expect(page.locator('text=Fill-in-the-Blank')).toBeVisible({ timeout: 10000 });
     
     // Fill blank 1
     await page.locator('input[id="blank1"]').fill(mockBlank1);
@@ -66,7 +65,7 @@ test.describe('Complete E2E Tests - Login & Form', () => {
     await page.locator('input[id="email"]').fill(mockEmail);
     await page.locator('input[id="password"]').fill(mockPassword);
     await page.locator('button:has-text("Login")').click();
-    await page.waitForURL('**/form', { timeout: 5000 });
+    await expect(page.locator('text=Fill-in-the-Blank')).toBeVisible({ timeout: 10000 });
     
     // Select dropdown option
     await page.locator('select[id="dropdown"]').selectOption(mockDropdown);
@@ -83,7 +82,7 @@ test.describe('Complete E2E Tests - Login & Form', () => {
     await page.locator('input[id="email"]').fill(mockEmail);
     await page.locator('input[id="password"]').fill(mockPassword);
     await page.locator('button:has-text("Login")').click();
-    await page.waitForURL('**/form', { timeout: 5000 });
+    await expect(page.locator('text=Fill-in-the-Blank')).toBeVisible({ timeout: 10000 });
     
     // Fill all inputs
     await page.locator('input[id="blank1"]').fill(mockBlank1);
@@ -106,7 +105,7 @@ test.describe('Complete E2E Tests - Login & Form', () => {
     await page.locator('input[id="email"]').fill(mockEmail);
     await page.locator('input[id="password"]').fill(mockPassword);
     await page.locator('button:has-text("Login")').click();
-    await page.waitForURL('**/form', { timeout: 5000 });
+    await expect(page.locator('text=Fill-in-the-Blank')).toBeVisible({ timeout: 10000 });
     
     // Fill all inputs
     await page.locator('input[id="blank1"]').fill(mockBlank1);

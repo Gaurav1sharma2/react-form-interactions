@@ -56,7 +56,7 @@ describe('FormInteractionsPage - Jest Unit Tests', () => {
     fireEvent.click(submitButton);
     
     await waitFor(() => {
-      expect(screen.getByText('This field is required')).toBeInTheDocument();
+      expect(screen.getAllByText('This field is required')).toHaveLength(3);
       expect(screen.getByText('Please select an option')).toBeInTheDocument();
     });
   });

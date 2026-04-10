@@ -27,7 +27,7 @@ npm install
 npm start
 ```
 
-The app will open at `http://localhost:3000`
+The app will open at `http://localhost:3001`
 
 ## Project Structure
 

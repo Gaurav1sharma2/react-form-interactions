@@ -1,13 +1,13 @@
 import { test, expect } from '@playwright/test';
 
 // ============================================
-// MODE 3: PLAYWRIGHT E2E TESTS (5 Tests Only)
+// MULTI-BROWSER E2E TESTS (5 Tests × 3 Browsers)
 // ============================================
-// Tests real browser interactions
-// Chrome (Chromium) engine only for speed
-// Mock Data: user@example.com / password123
+// Same test scenarios as complete-flow.spec.js
+// Runs on Chromium, Firefox, and WebKit
+// Sequential execution (no parallel)
 
-test.describe('Complete E2E Tests - Login & Form', () => {
+test.describe('Multi-Browser E2E Tests - Login & Form', () => {
   
   // Mock credentials
   const mockEmail = 'user@example.com';
@@ -18,7 +18,7 @@ test.describe('Complete E2E Tests - Login & Form', () => {
   const mockDropdown = 'hooks';
 
   // TEST 1: Login Functionality
-  test('TEST 1: User can login with valid credentials', async ({ page }) => {
+  test('MB-TEST 1: User can login with valid credentials', async ({ page }) => {
     await page.goto('http://localhost:3001');
     
     // Verify login page loaded
@@ -38,14 +38,14 @@ test.describe('Complete E2E Tests - Login & Form', () => {
   });
 
   // TEST 2: Fill Form Inputs
-  test('TEST 2: User can fill all form input fields', async ({ page }) => {
+  test('MB-TEST 2: User can fill all form input fields', async ({ page }) => {
     await page.goto('http://localhost:3001');
     
     // Login first
     await page.fill('input[id="email"]', mockEmail);
     await page.fill('input[id="password"]', mockPassword);
     await page.click('button.login-btn');
-    await page.waitForSelector('h1:has-text("Fill-in-the-Blank")', { timeout: 15000 });
+    await page.waitForSelector('h1:has-text("Fill-in-the-Blank")', { timeout: 10000 });
     
     // Fill blank 1
     await page.locator('input[id="blank1"]').fill(mockBlank1);
@@ -61,14 +61,14 @@ test.describe('Complete E2E Tests - Login & Form', () => {
   });
 
   // TEST 3: Dropdown Selection
-  test('TEST 3: User can select dropdown option', async ({ page }) => {
+  test('MB-TEST 3: User can select dropdown option', async ({ page }) => {
     await page.goto('http://localhost:3001');
     
     // Login first
     await page.fill('input[id="email"]', mockEmail);
     await page.fill('input[id="password"]', mockPassword);
     await page.click('button.login-btn');
-    await page.waitForSelector('h1:has-text("Fill-in-the-Blank")', { timeout: 15000 });
+    await page.waitForSelector('h1:has-text("Fill-in-the-Blank")', { timeout: 10000 });
     
     // Select dropdown option
     await page.locator('select[id="dropdown"]').selectOption(mockDropdown);
@@ -78,14 +78,14 @@ test.describe('Complete E2E Tests - Login & Form', () => {
   });
 
   // TEST 4: Complete Form Submission
-  test('TEST 4: User can submit complete form with all data', async ({ page }) => {
+  test('MB-TEST 4: User can submit complete form with all data', async ({ page }) => {
     await page.goto('http://localhost:3001');
     
     // Login
     await page.fill('input[id="email"]', mockEmail);
     await page.fill('input[id="password"]', mockPassword);
     await page.click('button.login-btn');
-    await page.waitForSelector('h1:has-text("Fill-in-the-Blank")', { timeout: 15000 });
+    await page.waitForSelector('h1:has-text("Fill-in-the-Blank")', { timeout: 10000 });
     
     // Fill all inputs
     await page.locator('input[id="blank1"]').fill(mockBlank1);
@@ -101,14 +101,14 @@ test.describe('Complete E2E Tests - Login & Form', () => {
   });
 
   // TEST 5: Form Displays Submitted Answers
-  test('TEST 5: Form displays submitted answers correctly', async ({ page }) => {
+  test('MB-TEST 5: Form displays submitted answers correctly', async ({ page }) => {
     await page.goto('http://localhost:3001');
     
     // Login
     await page.fill('input[id="email"]', mockEmail);
     await page.fill('input[id="password"]', mockPassword);
     await page.click('button.login-btn');
-    await page.waitForSelector('h1:has-text("Fill-in-the-Blank")', { timeout: 15000 });
+    await page.waitForSelector('h1:has-text("Fill-in-the-Blank")', { timeout: 10000 });
     
     // Fill all inputs
     await page.locator('input[id="blank1"]').fill(mockBlank1);

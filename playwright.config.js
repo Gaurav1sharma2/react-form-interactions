@@ -5,7 +5,7 @@ export default defineConfig({
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
-  workers: process.env.CI ? 1 : undefined,
+  workers: process.env.CI ? 2 : undefined,
   reporter: 'html',
   use: {
     baseURL: 'http://localhost:3001',
@@ -14,32 +14,36 @@ export default defineConfig({
   },
 
   projects: [
-    // Original: 5 tests on Chromium - PARALLEL (untouched)
+    // Original: 3 tests on Chromium - PARALLEL (2-4 workers)
     {
       name: 'chromium-parallel',
       use: { ...devices['Desktop Chrome'] },
       testMatch: '**/complete-flow.spec.js',
       fullyParallel: true,
+      workers: process.env.CI ? 2 : undefined,
     },
     
-    // New Scenario: Same 5 tests on 3 browsers - SEQUENTIAL (no cache, no parallel)
+    // New Scenario: Same 3 tests on 3 browsers - SEQUENTIAL (1 worker only)
     {
       name: 'chromium-sequential',
       use: { ...devices['Desktop Chrome'] },
       testMatch: '**/complete-flow.spec.js',
       fullyParallel: false,
+      workers: 1,
     },
     {
       name: 'firefox-sequential',
       use: { ...devices['Desktop Firefox'] },
       testMatch: '**/complete-flow.spec.js',
       fullyParallel: false,
+      workers: 1,
     },
     {
       name: 'webkit-sequential',
       use: { ...devices['Desktop Safari'] },
       testMatch: '**/complete-flow.spec.js',
       fullyParallel: false,
+      workers: 1,
     },
   ],
 

@@ -55,7 +55,7 @@ function FormInteractionsPage({ onLogout }) {
     if (successMessageRef.current) {
       successMessageRef.current.focus();
     }
-    setTimeout(() => setSubmitted(false), 3000);
+    setTimeout(() => setSubmitted(false), 3001);
   };
 
   return (

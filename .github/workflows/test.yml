@@ -87,16 +87,32 @@ jobs:
       run: npx playwright install --with-deps chromium firefox webkit
       continue-on-error: true
     
-    - name: Build Application
-      run: npm run build
-      continue-on-error: true
-    
     - name: Start Application Server
       run: |
-        npm start &
-        sleep 30
-        echo "✅ App started"
-      continue-on-error: true
+        echo "Starting app on port 3001..."
+        PORT=3001 npm start > /tmp/app.log 2>&1 &
+        APP_PID=$!
+        echo "App PID: $APP_PID"
+        
+        # Wait up to 120 seconds for app to start
+        for i in {1..120}; do
+          if curl -s http://localhost:3001 > /dev/null 2>&1; then
+            echo "✅ App started successfully on port 3001"
+            sleep 5
+            exit 0
+          fi
+          if [ $((i % 10)) -eq 0 ]; then
+            echo "Still waiting... ($i/120)"
+            tail -20 /tmp/app.log
+          fi
+          sleep 1
+        done
+        
+        echo "❌ App failed to start after 120 seconds"
+        echo "=== Full App Log ==="
+        cat /tmp/app.log
+        exit 1
+      continue-on-error: false
     
     - name: Playwright E2E Tests (Chrome Only)
       run: |

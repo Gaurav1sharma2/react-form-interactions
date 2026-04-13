@@ -87,6 +87,25 @@ jobs:
       run: npx playwright install --with-deps chromium firefox webkit
       continue-on-error: true
     
+    - name: Start Application Server (Background)
+      run: npm start > /tmp/app.log 2>&1 &
+      continue-on-error: true
+    
+    - name: Wait for Application to Start
+      run: |
+        for i in {1..30}; do
+          if curl -s http://localhost:3001 > /dev/null; then
+            echo "✅ Application started successfully"
+            exit 0
+          fi
+          echo "Waiting for app... ($i/30)"
+          sleep 2
+        done
+        echo "❌ Application failed to start"
+        cat /tmp/app.log
+        exit 1
+      continue-on-error: true
+    
     - name: Playwright E2E Tests (Chrome Only)
       run: |
         echo "=========================================="

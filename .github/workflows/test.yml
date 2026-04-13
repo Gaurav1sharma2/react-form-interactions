@@ -87,19 +87,35 @@ jobs:
       run: npx playwright install --with-deps chromium firefox webkit
       continue-on-error: true
     
+    - name: Playwright E2E Tests (Chrome Only)
+      run: |
+        echo "=========================================="
+        echo "MODE 3: PLAYWRIGHT E2E TESTS (Chrome Only)"
+        echo "=========================================="
+        echo ""
+        echo "Testing in: Chrome (Chromium) Engine - parallel execution"
+        echo "Speed: Optimized for CI/CD feedback - "
+        echo ""
+        npx playwright test --project=chromium-parallel
+        echo ""
+        echo "=========================================="
+        echo "✅ Playwright E2E tests (Chrome Only) completed!"
+        echo "=========================================="
+      continue-on-error: true
+
     - name: Playwright E2E Tests (Multi-Browser)
       run: |
         echo "=========================================="
         echo "MODE 3: PLAYWRIGHT E2E TESTS (Multi-Browser)"
         echo "=========================================="
         echo ""
-        echo "Testing in: Chrome, Firefox, Safari"
-        echo "Speed: Optimized for CI/CD feedback"
+        echo "Testing in: Chrome, Firefox, Safari (Sequential)"
+        echo "Speed: Comprehensive cross-browser validation"
         echo ""
-        npx playwright test
+        npx playwright test --project=chromium-sequential --project=firefox-sequential --project=webkit-sequential
         echo ""
         echo "=========================================="
-        echo "✅ Playwright E2E tests completed!"
+        echo "✅ Playwright E2E tests (Multi-Browser) completed!"
         echo "=========================================="
       continue-on-error: true
     

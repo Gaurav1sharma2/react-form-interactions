@@ -123,7 +123,7 @@ jobs:
         echo "Testing in: Chrome (Chromium) Engine - parallel execution"
         echo "Speed: Optimized for CI/CD feedback - "
         echo ""
-        npx playwright test --project=chromium-parallel
+        npx playwright test --project=chromium-parallel --workers=2
         echo ""
         echo "=========================================="
         echo "✅ Playwright E2E tests (Chrome Only) completed!"
@@ -139,7 +139,7 @@ jobs:
         echo "Testing in: Chrome, Firefox, Safari (Sequential)"
         echo "Speed: Comprehensive cross-browser validation"
         echo ""
-        npx playwright test --project=chromium-sequential --project=firefox-sequential --project=webkit-sequential
+        npx playwright test --project=chromium-sequential --project=firefox-sequential --project=webkit-sequential --workers=1
         echo ""
         echo "=========================================="
         echo "✅ Playwright E2E tests (Multi-Browser) completed!"

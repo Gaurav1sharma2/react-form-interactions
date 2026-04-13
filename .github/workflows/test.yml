@@ -84,19 +84,19 @@ jobs:
       continue-on-error: true
     
     - name: Install Playwright Browsers
-      run: npx playwright install --with-deps chromium
+      run: npx playwright install --with-deps chromium firefox webkit
       continue-on-error: true
     
-    - name: Playwright E2E Tests (5 Tests - Chrome Only)
+    - name: Playwright E2E Tests (Multi-Browser)
       run: |
         echo "=========================================="
-        echo "MODE 3: PLAYWRIGHT E2E TESTS (5 Tests)"
+        echo "MODE 3: PLAYWRIGHT E2E TESTS (Multi-Browser)"
         echo "=========================================="
         echo ""
-        echo "Testing in: Chrome (Chromium) Engine"
+        echo "Testing in: Chrome, Firefox, Safari"
         echo "Speed: Optimized for CI/CD feedback"
         echo ""
-        npx playwright test --project=chromium
+        npx playwright test
         echo ""
         echo "=========================================="
         echo "✅ Playwright E2E tests completed!"

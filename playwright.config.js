@@ -14,27 +14,31 @@ export default defineConfig({
   },
 
   projects: [
+    // Original: 5 tests on Chromium - PARALLEL (untouched)
     {
-      name: 'chromium',
+      name: 'chromium-parallel',
       use: { ...devices['Desktop Chrome'] },
       testMatch: '**/complete-flow.spec.js',
+      fullyParallel: true,
     },
+    
+    // New Scenario: Same 5 tests on 3 browsers - SEQUENTIAL (no cache, no parallel)
     {
-      name: 'chromium-multi',
+      name: 'chromium-sequential',
       use: { ...devices['Desktop Chrome'] },
-      testMatch: '**/multi-browser.spec.js',
+      testMatch: '**/complete-flow.spec.js',
       fullyParallel: false,
     },
     {
-      name: 'firefox-multi',
+      name: 'firefox-sequential',
       use: { ...devices['Desktop Firefox'] },
-      testMatch: '**/multi-browser.spec.js',
+      testMatch: '**/complete-flow.spec.js',
       fullyParallel: false,
     },
     {
-      name: 'webkit-multi',
+      name: 'webkit-sequential',
       use: { ...devices['Desktop Safari'] },
-      testMatch: '**/multi-browser.spec.js',
+      testMatch: '**/complete-flow.spec.js',
       fullyParallel: false,
     },
   ],
@@ -43,6 +47,8 @@ export default defineConfig({
     command: 'npm start',
     url: 'http://localhost:3001',
     reuseExistingServer: false,
-    timeout: 120000,
+    timeout: 180000,
+    stdout: 'pipe',
+    stderr: 'pipe',
   } : undefined,
 });

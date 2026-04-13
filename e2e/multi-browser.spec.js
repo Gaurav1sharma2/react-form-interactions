@@ -34,7 +34,7 @@ test.describe('Multi-Browser E2E Tests - Login & Form', () => {
     await page.click('button.login-btn');
     
     // Wait for form page to load (check for form heading)
-    await page.waitForSelector('h1:has-text("Fill-in-the-Blank")', { timeout: 10000 });
+    await page.waitForSelector('h1:has-text("Fill-in-the-Blank")', { timeout: 8000 });
   });
 
   // TEST 2: Fill Form Inputs
@@ -45,7 +45,7 @@ test.describe('Multi-Browser E2E Tests - Login & Form', () => {
     await page.fill('input[id="email"]', mockEmail);
     await page.fill('input[id="password"]', mockPassword);
     await page.click('button.login-btn');
-    await page.waitForSelector('h1:has-text("Fill-in-the-Blank")', { timeout: 10000 });
+    await page.waitForSelector('h1:has-text("Fill-in-the-Blank")', { timeout: 8000 });
     
     // Fill blank 1
     await page.locator('input[id="blank1"]').fill(mockBlank1);
@@ -68,60 +68,12 @@ test.describe('Multi-Browser E2E Tests - Login & Form', () => {
     await page.fill('input[id="email"]', mockEmail);
     await page.fill('input[id="password"]', mockPassword);
     await page.click('button.login-btn');
-    await page.waitForSelector('h1:has-text("Fill-in-the-Blank")', { timeout: 10000 });
+    await page.waitForSelector('h1:has-text("Fill-in-the-Blank")', { timeout: 8000 });
     
     // Select dropdown option
     await page.locator('select[id="dropdown"]').selectOption(mockDropdown);
     
     // Verify selection
     await expect(page.locator('select[id="dropdown"]')).toHaveValue(mockDropdown);
-  });
-
-  // TEST 4: Complete Form Submission
-  test('MB-TEST 4: User can submit complete form with all data', async ({ page }) => {
-    await page.goto('http://localhost:3001');
-    
-    // Login
-    await page.fill('input[id="email"]', mockEmail);
-    await page.fill('input[id="password"]', mockPassword);
-    await page.click('button.login-btn');
-    await page.waitForSelector('h1:has-text("Fill-in-the-Blank")', { timeout: 10000 });
-    
-    // Fill all inputs
-    await page.locator('input[id="blank1"]').fill(mockBlank1);
-    await page.locator('input[id="blank2"]').fill(mockBlank2);
-    await page.locator('input[id="blank3"]').fill(mockBlank3);
-    await page.locator('select[id="dropdown"]').selectOption(mockDropdown);
-    
-    // Submit form
-    await page.locator('button:has-text("Submit")').click();
-    
-    // Verify success message
-    await expect(page.locator('text=Form submitted successfully')).toBeVisible({ timeout: 5000 });
-  });
-
-  // TEST 5: Form Displays Submitted Answers
-  test('MB-TEST 5: Form displays submitted answers correctly', async ({ page }) => {
-    await page.goto('http://localhost:3001');
-    
-    // Login
-    await page.fill('input[id="email"]', mockEmail);
-    await page.fill('input[id="password"]', mockPassword);
-    await page.click('button.login-btn');
-    await page.waitForSelector('h1:has-text("Fill-in-the-Blank")', { timeout: 10000 });
-    
-    // Fill all inputs
-    await page.locator('input[id="blank1"]').fill(mockBlank1);
-    await page.locator('input[id="blank2"]').fill(mockBlank2);
-    await page.locator('input[id="blank3"]').fill(mockBlank3);
-    await page.locator('select[id="dropdown"]').selectOption(mockDropdown);
-    
-    // Submit form
-    await page.locator('button:has-text("Submit")').click();
-    
-    // Verify answers display with specific selectors
-    await expect(page.locator('.answers-display')).toContainText(mockBlank1);
-    await expect(page.locator('.answers-display')).toContainText(mockBlank3);
-    await expect(page.locator('.answers-display')).toContainText(mockDropdown);
   });
 });

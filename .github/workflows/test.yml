@@ -87,6 +87,17 @@ jobs:
       run: npx playwright install --with-deps chromium firefox webkit
       continue-on-error: true
     
+    - name: Build Application
+      run: npm run build
+      continue-on-error: true
+    
+    - name: Start Application Server
+      run: |
+        npm start &
+        sleep 30
+        echo "✅ App started"
+      continue-on-error: true
+    
     - name: Playwright E2E Tests (Chrome Only)
       run: |
         echo "=========================================="

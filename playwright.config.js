@@ -13,36 +13,32 @@ export default defineConfig({
   },
 
   projects: [
-    // Original: 3 tests on Chromium - PARALLEL (2-4 workers)
+    // Original: 3 tests on Chromium - PARALLEL
     {
       name: 'chromium-parallel',
       use: { ...devices['Desktop Chrome'] },
       testMatch: '**/complete-flow.spec.js',
       fullyParallel: true,
-      workers: process.env.CI ? 2 : undefined,
     },
     
-    // New Scenario: Same 3 tests on 3 browsers - SEQUENTIAL (1 worker only)
+    // New Scenario: Same 3 tests on 3 browsers - SEQUENTIAL
     {
       name: 'chromium-sequential',
       use: { ...devices['Desktop Chrome'] },
       testMatch: '**/complete-flow.spec.js',
       fullyParallel: false,
-      workers: 1,
     },
     {
       name: 'firefox-sequential',
       use: { ...devices['Desktop Firefox'] },
       testMatch: '**/complete-flow.spec.js',
       fullyParallel: false,
-      workers: 1,
     },
     {
       name: 'webkit-sequential',
       use: { ...devices['Desktop Safari'] },
       testMatch: '**/complete-flow.spec.js',
       fullyParallel: false,
-      workers: 1,
     },
   ],
 

@@ -131,14 +131,14 @@ jobs:
       continue-on-error: true
 
     # OPTIONAL: Auto-commit snapshots to repo (uncomment to enable)
-    # - name: Commit Snapshots
-    #   run: |
-    #     git config --local user.email "action@github.com"
-    #     git config --local user.name "GitHub Action"
-    #     git add e2e/**/*-snapshots/
-    #     git commit -m "Update Playwright visual regression snapshots" || true
-    #     git push
-    #   continue-on-error: true
+    - name: Commit Snapshots
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add e2e/**/*-snapshots/
+        git commit -m "Update Playwright visual regression snapshots" || true
+        git push
+      continue-on-error: true
 
     - name: Playwright E2E Tests (Chrome Only)
       run: |

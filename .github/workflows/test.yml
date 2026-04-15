@@ -136,7 +136,7 @@ jobs:
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
-        git add e2e/**/*-snapshots/
+        git add e2e/complete-flow.spec.js-snapshots/ e2e/multi-browser.spec.js-snapshots/ 2>/dev/null || true
         git commit -m "Update Playwright visual regression snapshots" || echo "No changes to commit"
         git push || echo "Push failed or nothing to push"
       continue-on-error: true

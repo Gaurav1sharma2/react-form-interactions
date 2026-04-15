@@ -125,6 +125,7 @@ jobs:
     - name: Update Playwright Snapshots
       run: |
         echo "Creating/updating Playwright baseline snapshots..."
+        npx playwright test --project=chromium-parallel --update-snapshots
         npx playwright test --project=chromium-sequential --update-snapshots
         npx playwright test --project=firefox-sequential --update-snapshots
         npx playwright test --project=webkit-sequential --update-snapshots
@@ -136,8 +137,8 @@ jobs:
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
         git add e2e/**/*-snapshots/
-        git commit -m "Update Playwright visual regression snapshots" || true
-        git push
+        git commit -m "Update Playwright visual regression snapshots" || echo "No changes to commit"
+        git push || echo "Push failed or nothing to push"
       continue-on-error: true
 
     - name: Playwright E2E Tests (Chrome Only)

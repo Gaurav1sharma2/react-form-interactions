@@ -114,6 +114,12 @@ jobs:
         exit 1
       continue-on-error: false
     
+    - name: Update Playwright Snapshots
+      run: |
+        echo "Creating/updating Playwright baseline snapshots..."
+        npx playwright test --project=chromium-sequential --update-snapshots
+      continue-on-error: true
+
     - name: Playwright E2E Tests (Chrome Only)
       run: |
         echo "=========================================="

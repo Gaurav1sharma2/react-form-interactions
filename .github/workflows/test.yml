@@ -141,6 +141,10 @@ jobs:
         git push || echo "Push failed or nothing to push"
       continue-on-error: true
 
+    - name: Pull Latest Snapshots
+      run: git pull origin main || true
+      continue-on-error: true
+
     - name: Playwright E2E Tests (Chrome Only)
       run: |
         echo "=========================================="

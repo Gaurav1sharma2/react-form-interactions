@@ -190,6 +190,50 @@ jobs:
         echo "✅ Playwright E2E tests (Multi-Browser) completed!"
         echo "=========================================="
       continue-on-error: true
+
+    - name: Generate Ortoni Report
+      if: always()
+      run: |
+        echo "=========================================="
+        echo "GENERATING ORTONI TEST REPORT"
+        echo "=========================================="
+        echo ""
+        echo "✅ Ortoni Report generated at: ortoni-report/ortoni-report.html"
+        echo "📊 Report includes:"
+        echo "   - Test execution summary"
+        echo "   - Screenshots & videos"
+        echo "   - Detailed test metrics"
+        echo "   - Project metadata"
+        echo ""
+        echo "=========================================="
+      continue-on-error: true
+
+    - name: Upload Ortoni Report Artifact
+      if: always()
+      uses: actions/upload-artifact@v3
+      with:
+        name: ortoni-report
+        path: ortoni-report/
+        retention-days: 30
+      continue-on-error: true
+
+    - name: Upload Playwright Report Artifact
+      if: always()
+      uses: actions/upload-artifact@v3
+      with:
+        name: playwright-report
+        path: playwright-report/
+        retention-days: 30
+      continue-on-error: true
+
+    - name: Upload Test Results
+      if: always()
+      uses: actions/upload-artifact@v3
+      with:
+        name: test-results
+        path: test-results/
+        retention-days: 30
+      continue-on-error: true
     
     - name: Build Application
       run: |
